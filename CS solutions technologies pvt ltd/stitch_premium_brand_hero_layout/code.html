@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Creative Solar Solution - Powering a Sustainable Future</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Plus+Jakarta+Sans:wght@700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script
+        id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "surface-tint": "#01629d", "primary-accent": "#00a3ff", "on-primary": "#ffffff", "on-tertiary-fixed": "#04006d", outline: "#717881", error: "#ba1a1a", "on-error": "#ffffff", "surface-container-lowest": "#ffffff", "secondary-fixed": "#ffdbd1", "outline-variant": "#c0c7d1", "on-surface-variant": "#414750", "on-primary-container": "#bcdbff", "on-background": "#191c20", "inverse-primary": "#99cbff", "tertiary-fixed-dim": "#c0c1ff", "error-container": "#ffdad6", "surface-bg": "#F9FBF9", "on-secondary-container": "#541100", "primary-fixed": "#cfe5ff", "surface-bright": "#f8f9ff", "secondary-fixed-dim": "#ffb5a0", "on-surface": "#191c20", "surface-container-low": "#f2f3f9", "surface-container-highest": "#e1e2e8", secondary: "#b02f00", "surface-container-high": "#e6e8ed", "on-tertiary-container": "#d4d4ff", "primary-container": "#00629d", "surface-dim": "#d8dadf", "on-tertiary": "#ffffff", surface: "#f8f9ff", primary: "#004a78", background: "#f8f9ff", "hero-overlay-end": "rgba(255, 255, 255, 0.1)", "primary-fixed-dim": "#99cbff", "hero-overlay-start": "rgba(255, 255, 255, 0.95)", "surface-variant": "#e1e2e8", "tertiary-container": "#4b4fc6", "inverse-on-surface": "#eff1f6", "on-primary-fixed": "#001d34", "on-secondary": "#ffffff", "inverse-surface": "#2e3135", "surface-container": "#eceef3", "on-tertiary-fixed-variant": "#3235ad", "on-primary-fixed-variant": "#004a78", "tertiary-fixed": "#e1e0ff", "on-secondary-fixed": "#3b0900", tertiary: "#3234ad", "on-secondary-fixed-variant": "#862200", "on-error-container": "#93000a", "secondary-container": "#ff5722", "creative-blue": "#1E3A8A", "creative-red": "#DC2626" }, borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px", "creative": "24px" }, spacing: { "margin-mobile": "24px", "stack-md": "16px", "stack-sm": "8px", "margin-desktop": "64px", "stack-lg": "24px", "container-max": "1280px", "section-padding": "120px", gutter: "32px" }, fontFamily: { "headline-md": ["Plus Jakarta Sans"], "body-md": ["Inter"], "body-lg": ["Inter"], "headline-xl": ["Plus Jakarta Sans"], "label-bold": ["Inter"], "headline-lg": ["Plus Jakarta Sans"], "headline-xl-mobile": ["Plus Jakarta Sans"] }, fontSize: { "headline-md": ["32px", { lineHeight: "1.3", fontWeight: "700" }], "body-md": ["16px", { lineHeight: "1.5", fontWeight: "400" }], "body-lg": ["18px", { lineHeight: "1.6", fontWeight: "400" }], "headline-xl": ["64px", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "800" }], "label-bold": ["14px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "600" }], "headline-lg": ["48px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "700" }], "headline-xl-mobile": ["40px", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "800" }] } } } };</script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* Modal Transitions & Form */
+        #quote-modal {
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #quote-modal.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        #quote-modal-content {
+            transform: translateY(20px) scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #quote-modal.active #quote-modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .step-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .step-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body-md antialiased overflow-x-hidden">
+    <!-- TopNavBar -->
+    <header
+        class="fixed top-0 left-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-xl border-b border-outline/10 shadow-sm transition-all duration-300">
+        <div
+            class="flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 max-w-container-max mx-auto">
+            <div class="flex items-center gap-4">
+                <img class="h-10 object-contain"
+                    data-alt="Creative Solar Solution Logo, professional corporate logo with blue and red elements"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1gVbVbqXQ5ot2fuc1NiEXrzpeBqdOXPSJXUDpVoA_SxFxXIOum9mOe0gjdhRvop3GG6doXO7eEwYKkUGeiGVX9dpTalge_RHM8YETW4tNc2-aP5DOrfvePmdfCLJ16Gl7AeMx5FyJ4PSLv_HY5hxM2_UIU-zSrBCSDa_sdVfu79T6wKcwAWiCOwAFAgLGUyqjhsdQy_Fcns94SIVkZ8rzrei-b16DqAXLm8Du8nYyMRBxfwN8iPgu7W7KR2kzmRydhdY94HVYhRA" />
+                <span
+                    class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-accent hidden md:block tracking-tight">Creative
+                    Solar Solution</span>
+            </div>
+            <nav class="hidden md:flex items-center gap-stack-lg">
+                <a class="text-secondary dark:text-secondary-container border-b-2 border-secondary dark:border-secondary-container pb-1 font-label-bold text-label-bold"
+                    href="#home">Home</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-accent transition-colors font-label-bold text-label-bold hover:bg-surface-container-high/50 dark:hover:bg-surface-container-highest/50 px-3 py-2 rounded-lg"
+                    href="#about-us">About Us</a>
+                <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary-accent transition-colors font-label-bold text-label-bold hover:bg-surface-container-high/50 dark:hover:bg-surface-container-highest/50 px-3 py-2 rounded-lg"
+                    href="#services">Solutions</a>
+                <a class="text-on-surface-variant hover:text-primary font-label-bold flex items-center gap-1 transition-colors px-3 py-2"
+                    href="tel:+94774122205">
+                    <span class="material-symbols-outlined text-[18px]">call</span> +94 77 412 2205
+                </a>
+            </nav>
+            <a href="https://wa.me/94774122205?text=Hello!%20I%20would%20like%20to%20get%20started%20with%20your%20services."
+                target="_blank" rel="noopener noreferrer"
+                class="hidden md:flex items-center justify-center bg-[#25D366] text-white font-label-bold text-label-bold py-2.5 px-6 rounded-full hover:scale-95 transition-transform duration-200 shadow-md gap-2">
+                <span class="material-symbols-outlined text-[18px]">chat</span>
+                Get Started
+            </a>
+            <button class="md:hidden text-on-surface-variant">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </header>
+    <!-- Hero Section -->
+    <section id="home"
+        class="relative min-h-[921px] flex items-center pt-24 pb-section-padding px-margin-mobile md:px-margin-desktop">
+        <div class="absolute inset-0 z-0">
+            <video class="w-full h-full object-cover opacity-60" autoplay loop muted playsinline>
+                <source src="../0708.mp4" type="video/mp4" />
+            </video>
+            <div class="absolute inset-0 bg-gradient-to-r from-hero-overlay-start via-surface/80 to-hero-overlay-end">
+            </div>
+        </div>
+        <div
+            class="relative z-10 max-w-container-max mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pb-24 md:pb-0">
+            <!-- Left Column: Text -->
+            <div class="col-span-1 lg:col-span-8 flex flex-col items-start gap-stack-lg">
+                <div
+                    class="inline-flex items-center gap-2 bg-surface-container-lowest/90 backdrop-blur px-4 py-2 rounded-full border border-outline-variant/30 shadow-sm">
+                    <span class="material-symbols-outlined text-creative-red"
+                        style="font-variation-settings: 'FILL' 1;">bolt</span>
+                    <span class="font-label-bold text-label-bold text-creative-blue">The Future of Energy</span>
+                </div>
+                <h1
+                    class="font-headline-xl-mobile text-headline-xl-mobile md:font-headline-xl md:text-headline-xl text-on-surface">
+                    Grow Your Business With Our Premium Solutions
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">
+                    Unlock long-term savings and energy independence with our reliable, state-of-the-art solar
+                    installations designed for peak performance.
+                </p>
+                <div class="mt-4">
+                    <button onclick="openModal()"
+                        class="bg-creative-red text-white font-label-bold text-label-bold py-3.5 px-10 rounded-full hover:scale-95 transition-transform duration-200 shadow-lg shadow-creative-red/20 flex items-center gap-2">
+                        Request a Quote <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Floating Stats Benthos -->
+        <div
+            class="absolute bottom-0 left-0 w-full transform translate-y-1/2 px-margin-mobile md:px-margin-desktop z-20 hidden md:block">
+            <div class="max-w-container-max mx-auto grid grid-cols-4 gap-4">
+                <div class="glass-card p-6 rounded-creative shadow-lg flex items-start gap-4">
+                    <div class="p-3 bg-creative-blue/10 rounded-full shrink-0">
+                        <span class="material-symbols-outlined text-creative-blue text-3xl"
+                            style="font-variation-settings: 'FILL' 1;">solar_power</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-[20px] font-bold text-on-surface leading-tight">Solar Solutions
+                        </h3>
+                        <p class="text-sm text-on-surface-variant mt-1">Integrated clean energy systems</p>
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded-creative shadow-lg flex items-start gap-4">
+                    <div class="p-3 bg-creative-red/10 rounded-full shrink-0">
+                        <span class="material-symbols-outlined text-creative-red text-3xl"
+                            style="font-variation-settings: 'FILL' 1;">trending_down</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-[20px] font-bold text-on-surface leading-tight">Lower Costs
+                        </h3>
+                        <p class="text-sm text-on-surface-variant mt-1">Reduce your electricity bills</p>
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded-creative shadow-lg flex items-start gap-4">
+                    <div class="p-3 bg-creative-blue/10 rounded-full shrink-0">
+                        <span class="material-symbols-outlined text-creative-blue text-3xl"
+                            style="font-variation-settings: 'FILL' 1;">energy_savings_leaf</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-[20px] font-bold text-on-surface leading-tight">10+ Years</h3>
+                        <p class="text-sm text-on-surface-variant mt-1">Trusted renewable experience</p>
+                    </div>
+                </div>
+                <div class="glass-card p-6 rounded-creative shadow-lg flex items-start gap-4">
+                    <div class="p-3 bg-creative-red/10 rounded-full shrink-0">
+                        <span class="material-symbols-outlined text-creative-red text-3xl"
+                            style="font-variation-settings: 'FILL' 1;">savings</span>
+                    </div>
+                    <div>
+                        <h3 class="font-headline-md text-[20px] font-bold text-on-surface leading-tight">40% Savings
+                        </h3>
+                        <p class="text-sm text-on-surface-variant mt-1">Potential energy cost reduction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Us Section -->
+    <section class="bg-[#F9FBF9] py-section-padding px-margin-mobile md:px-margin-desktop" id="about-us">
+        <div class="max-w-container-max mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <!-- Left Column -->
+            <div class="flex flex-col items-start gap-6">
+                <div class="inline-flex items-center bg-[#DC2626]/10 px-4 py-2 rounded-full">
+                    <span class="font-label-bold text-[14px] text-creative-blue uppercase tracking-wider">ABOUT
+                        US</span>
+                </div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface">
+                    About <span style="color: #DC2626;">Creative Solar</span> <span
+                        class="text-black font-extrabold">Solution</span>
+                </h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    Creative Solar Solution is dedicated to providing smart, high-quality, and affordable solar energy
+                    solutions. We empower individuals and businesses to transition to sustainable energy, drastically
+                    reducing electricity costs and protecting the planet.
+                </p>
+                <div class="flex items-center gap-4 mt-4">
+                    <div class="flex items-center text-[#FFC107]">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <span class="font-label-bold text-on-surface">Excellent 4.8/5 Rating</span>
+                </div>
+            </div>
+            <!-- Right Column -->
+            <div class="relative w-full h-[600px]">
+                <img alt="Solar panel installation" class="w-full h-full object-cover rounded-[24px] shadow-lg"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoNJsfP2d9BLXR16BsnJvnDFvN7GmHPhqSRZm8J9l8EFN-sIDl5qaYsfXJl_y35O_YZD3X7CQSZAt8LAOWOa_XcMKyGWSBm8ydL2tqN2F-8TQkfELQu-HA3wS_tjJvK-SfocNut2z3V1NHbwVT2Oud2yHyocTn1lLM9cIzPxs0O0-m4ZX9shIQn0GVFkFQ25NO1cxjoOwva9eI7PVzXD8hmmjcNfq4tIt9bSdLn8cpz-cez73gh7L05q-1ZN3bLAB0_pftMjyp5Uw" />
+                <!-- Floating Cards -->
+                <div class="absolute -bottom-8 left-8 right-8 flex flex-col md:flex-row justify-center gap-4 z-10">
+                    <div class="bg-white p-4 rounded-[24px] shadow-lg flex items-center gap-3 flex-1">
+                        <div class="p-2 bg-creative-blue/10 rounded-full shrink-0">
+                            <span class="material-symbols-outlined text-creative-blue"
+                                style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        <span class="font-label-bold text-sm text-on-surface">95% Client Satisfaction</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-[24px] shadow-lg flex items-center gap-3 flex-1">
+                        <div class="p-2 bg-creative-red/10 rounded-full shrink-0">
+                            <span class="material-symbols-outlined text-creative-red"
+                                style="font-variation-settings: 'FILL' 1;">domain</span>
+                        </div>
+                        <span class="font-label-bold text-sm text-on-surface">50+ Large-Scale Projects</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-[24px] shadow-lg flex items-center gap-3 flex-1">
+                        <div class="p-2 bg-creative-blue/10 rounded-full shrink-0">
+                            <span class="material-symbols-outlined text-creative-blue"
+                                style="font-variation-settings: 'FILL' 1;">eco</span>
+                        </div>
+                        <span class="font-label-bold text-sm text-on-surface">Verified Environmental Impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Our Services Section -->
+    <section class="bg-white py-section-padding px-margin-mobile md:px-margin-desktop" id="services">
+        <div class="max-w-container-max mx-auto flex flex-col items-center">
+            <div class="text-center mb-16">
+                <h2 class="font-headline-lg text-[48px] font-bold text-black mb-4">
+                    Solar &amp; Energy Solutions
+                </h2>
+                <p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                    Comprehensive renewable energy services tailored for your unique needs.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mb-12">
+                <!-- Card 1 -->
+                <div
+                    class="group relative h-[400px] rounded-[24px] overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img alt="Residential Solar"
+                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmKk4AVXe_4aHHeSkx9hBYvGbnHv5A8FNfpZWJELU-LNRXS8VAXN_K5sM0SeEMT377-R3peIXo2GfuA1BXLkOdUjU3YCA0WFeB2EUlGIEAgq-HVVIP6_dVo1rlZb-611Ns4Q53hJkoKb3YeEWkPk7sHqFVSmQ2cA7pOAVLJWntV_br4zTiC_0pYqQbRy1029SXtzWJ8QfNtPZeEm8H3Mn-QBfokmXJC_Xb1ROkCM4Pbir0wNcdUyJiLuTu-FNuGcIJdwkBRh1IULs" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
+                        <h3 class="font-headline-md text-white text-[24px] max-w-[200px]">Residential Solar</h3>
+                        <button
+                            class="bg-[#DC2626] w-12 h-12 rounded-full flex items-center justify-center hover:bg-white hover:text-[#DC2626] transition-colors duration-300">
+                            <span
+                                class="material-symbols-outlined text-white hover:text-[#DC2626] transition-colors">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="group relative h-[400px] rounded-[24px] overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img alt="Commercial &amp; Industrial Solar"
+                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSGyorZoTIyA-1vwTjYjcuBJeO6CLVk2CiCCY9uBJ0N-tgsCgAyO1867SxGpEoWqa7_gQRaGAXPaAVfUesQ8LN0SdnZPMosCwyWS380iLlr2FazjXdvMa43pH_jloTO3s3q9Vm1xSRds8zrw4HPrbyTfRWHyJCl-jYNCyV3lxnE6lBFC7hz-w6mNiyATmGeTol55DyR8DZqWtK9ziSImqYRyflrJN3h6IZYENyrQM76HapS-7hIVUVD9WnjrCBANtrv-v2PXQsvFk" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
+                        <h3 class="font-headline-md text-white text-[24px] max-w-[200px]">Commercial &amp; Industrial
+                            Solar</h3>
+                        <button
+                            class="bg-[#DC2626] w-12 h-12 rounded-full flex items-center justify-center hover:bg-white hover:text-[#DC2626] transition-colors duration-300">
+                            <span
+                                class="material-symbols-outlined text-white hover:text-[#DC2626] transition-colors">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div
+                    class="group relative h-[400px] rounded-[24px] overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+                    <img alt="Solar Net Metering &amp; Maintenance"
+                        class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl3gobP4jcik1-fSlQzVZM1Rq5AnOchuA_RZ05sP-vX1MehQvx3isej8B7ZCaCYZeWBIAX_8rR8WXB8yorW-ImevEoswwDGmx3yInsVf509_ww4paKds9efWSoKsH2jnAEFduyVmFIOZZNCg2bRmzGY7CmjNpC2bZ5CiAbOtPVSrbt4l2vsHlEUfXczc2otd8AdBY6EYBCdPWdoIg6997-fdygPt2osBwVA58DuVIMrUSt7albeEAgp85QtSqKU_tdxloLfIMVz_o" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 p-8 w-full flex justify-between items-end">
+                        <h3 class="font-headline-md text-white text-[24px] max-w-[200px]">Solar Net Metering &amp;
+                            Maintenance</h3>
+                        <button
+                            class="bg-[#DC2626] w-12 h-12 rounded-full flex items-center justify-center hover:bg-white hover:text-[#DC2626] transition-colors duration-300">
+                            <span
+                                class="material-symbols-outlined text-white hover:text-[#DC2626] transition-colors">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <button
+                class="bg-creative-blue text-white font-label-bold text-label-bold py-4 px-10 rounded-full hover:bg-primary-fixed-variant hover:shadow-lg transition-all duration-300">
+                View All Services
+            </button>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer id="contact"
+        class="bg-surface-container-lowest dark:bg-inverse-surface w-full py-section-padding px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-start gap-stack-lg border-t-8 border-surface-container-low dark:border-surface-container-highest mt-32 relative z-10">
+        <div class="flex flex-col gap-4 max-w-sm">
+            <div class="flex items-center gap-3">
+                <img class="h-12 object-contain" data-alt="Creative Solar Solution Logo, footer version"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1gVbVbqXQ5ot2fuc1NiEXrzpeBqdOXPSJXUDpVoA_SxFxXIOum9mOe0gjdhRvop3GG6doXO7eEwYKkUGeiGVX9dpTalge_RHM8YETW4tNc2-aP5DOrfvePmdfCLJ16Gl7AeMx5FyJ4PSLv_HY5hxM2_UIU-zSrBCSDa_sdVfu79T6wKcwAWiCOwAFAgLGUyqjhsdQy_Fcns94SIVkZ8rzrei-b16DqAXLm8Du8nYyMRBxfwN8iPgu7W7KR2kzmRydhdY94HVYhRA" />
+                <span
+                    class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-accent tracking-tight">Creative
+                    Solar Solution</span>
+            </div>
+            <p class="text-sm text-on-surface-variant mt-2">© 2024 Creative Solar Solution. All rights reserved.
+                Powering tomorrow with smart, scalable renewable solutions.</p>
+        </div>
+        <div class="flex flex-col gap-3">
+            <h4 class="font-label-bold text-label-bold text-on-surface mb-2 uppercase tracking-wider">Company</h4>
+            <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors hover:translate-x-1 duration-200"
+                href="#">+ SS18</a>
+            <a class="text-secondary dark:text-secondary-fixed font-bold hover:translate-x-1 transition-transform duration-200"
+                href="#">creative-solar.com</a>
+        </div>
+        <div class="flex flex-col gap-3">
+            <h4 class="font-label-bold text-label-bold text-on-surface mb-2 uppercase tracking-wider">Legal</h4>
+            <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors hover:translate-x-1 duration-200"
+                href="#">Privacy Policy</a>
+            <a class="text-on-surface-variant dark:text-on-surface-variant hover:text-secondary dark:hover:text-secondary-fixed transition-colors hover:translate-x-1 duration-200"
+                href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <!-- Quote Modal Overlay -->
+    <div id="quote-modal"
+        class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+        <!-- Modal Content -->
+        <div id="quote-modal-content"
+            class="bg-white w-full max-w-2xl rounded-[24px] shadow-2xl relative overflow-hidden flex flex-col max-h-[90vh]">
+            <!-- Header & Close Button -->
+            <div class="flex justify-between items-center p-6 border-b border-outline/10 bg-surface-container-lowest">
+                <h2 class="font-headline-md text-xl font-bold text-on-surface">Request a Quote</h2>
+                <button onclick="closeModal()"
+                    class="w-10 h-10 rounded-full flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high transition-colors text-on-surface-variant group">
+                    <span class="material-symbols-outlined group-hover:text-error transition-colors">close</span>
+                </button>
+            </div>
+
+            <!-- Form Body with Scrolling -->
+            <div class="p-6 md:p-8 overflow-y-auto">
+                <!-- Progress Bar -->
+                <div class="flex justify-between mb-8 relative px-4">
+                    <div
+                        class="absolute top-1/2 left-4 right-4 h-1 bg-surface-container-highest -z-10 -translate-y-1/2 rounded-full">
+                    </div>
+                    <div id="progress-bar-fill"
+                        class="absolute top-1/2 left-4 h-1 bg-creative-blue -z-10 -translate-y-1/2 rounded-full transition-all duration-500 w-[0%]">
+                    </div>
+
+                    <div class="flex flex-col items-center gap-2">
+                        <div id="step-indicator-1"
+                            class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-white bg-creative-blue shadow-md transition-colors duration-300 text-sm">
+                            1</div>
+                        <span
+                            class="text-[10px] font-label-bold text-creative-blue uppercase tracking-wider">Contact</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div id="step-indicator-2"
+                            class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-on-surface-variant bg-surface-container-highest transition-colors duration-300 text-sm">
+                            2</div>
+                        <span id="step-text-2"
+                            class="text-[10px] font-label-bold text-on-surface-variant uppercase tracking-wider">Project</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div id="step-indicator-3"
+                            class="w-8 h-8 rounded-full flex items-center justify-center font-bold text-on-surface-variant bg-surface-container-highest transition-colors duration-300 text-sm">
+                            3</div>
+                        <span id="step-text-3"
+                            class="text-[10px] font-label-bold text-on-surface-variant uppercase tracking-wider">Details</span>
+                    </div>
+                </div>
+
+                <form id="multiStepForm"
+                    onsubmit="event.preventDefault(); alert('Quote Request Submitted Successfully!'); closeModal();">
+                    <!-- Step 1: Contact Details -->
+                    <div id="step-1" class="step-content active">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-label-bold text-on-surface mb-1">Full Name *</label>
+                                <input type="text" required
+                                    class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                    placeholder="Enter your full name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-label-bold text-on-surface mb-1">Email Address
+                                    *</label>
+                                <input type="email" required
+                                    class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                    placeholder="Enter your email">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-label-bold text-on-surface mb-1">Phone Number *</label>
+                                <input type="tel" required
+                                    class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                                    placeholder="e.g. +94 77 000 0000">
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end">
+                            <button type="button" onclick="nextStep(2)"
+                                class="bg-creative-blue text-white font-label-bold px-6 py-2.5 rounded-full hover:bg-primary-fixed-variant transition-colors shadow-md">Next
+                                Step</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Project Requirements -->
+                    <div id="step-2" class="step-content">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-label-bold text-on-surface mb-1">Service Needed
+                                    *</label>
+                                <div class="relative">
+                                    <select required
+                                        class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all appearance-none text-on-surface">
+                                        <option value="" disabled selected>Select a service type</option>
+                                        <option value="residential">Residential Solar Installation</option>
+                                        <option value="commercial">Commercial & Industrial Solar</option>
+                                        <option value="maintenance">System Maintenance & Net Metering</option>
+                                    </select>
+                                    <span
+                                        class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-label-bold text-on-surface mb-2">Estimated Budget
+                                    *</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <label
+                                        class="relative flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-primary-fixed/30 hover:border-primary transition-all">
+                                        <input type="radio" name="budget" value="under_5k" class="peer sr-only"
+                                            required>
+                                        <div
+                                            class="w-4 h-4 border-2 border-outline rounded-full peer-checked:border-primary peer-checked:border-[4px] mr-2 transition-all">
+                                        </div>
+                                        <span class="text-on-surface font-semibold text-sm">Under $5k</span>
+                                    </label>
+                                    <label
+                                        class="relative flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-primary-fixed/30 hover:border-primary transition-all">
+                                        <input type="radio" name="budget" value="5k_to_15k" class="peer sr-only">
+                                        <div
+                                            class="w-4 h-4 border-2 border-outline rounded-full peer-checked:border-primary peer-checked:border-[4px] mr-2 transition-all">
+                                        </div>
+                                        <span class="text-on-surface font-semibold text-sm">$5k - $15k</span>
+                                    </label>
+                                    <label
+                                        class="relative flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-primary-fixed/30 hover:border-primary transition-all">
+                                        <input type="radio" name="budget" value="15k_to_50k" class="peer sr-only">
+                                        <div
+                                            class="w-4 h-4 border-2 border-outline rounded-full peer-checked:border-primary peer-checked:border-[4px] mr-2 transition-all">
+                                        </div>
+                                        <span class="text-on-surface font-semibold text-sm">$15k - $50k</span>
+                                    </label>
+                                    <label
+                                        class="relative flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:bg-primary-fixed/30 hover:border-primary transition-all">
+                                        <input type="radio" name="budget" value="over_50k" class="peer sr-only">
+                                        <div
+                                            class="w-4 h-4 border-2 border-outline rounded-full peer-checked:border-primary peer-checked:border-[4px] mr-2 transition-all">
+                                        </div>
+                                        <span class="text-on-surface font-semibold text-sm">Over $50k</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-between">
+                            <button type="button" onclick="prevStep(1)"
+                                class="text-on-surface-variant font-label-bold px-5 py-2.5 rounded-full hover:bg-surface-container-high transition-colors">Back</button>
+                            <button type="button" onclick="nextStep(3)"
+                                class="bg-creative-blue text-white font-label-bold px-6 py-2.5 rounded-full hover:bg-primary-fixed-variant transition-colors shadow-md">Next
+                                Step</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Project Details -->
+                    <div id="step-3" class="step-content">
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-label-bold text-on-surface mb-1">Describe your project
+                                    *</label>
+                                <textarea required rows="3"
+                                    class="w-full px-4 py-2.5 rounded-lg border border-outline-variant bg-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all resize-none"
+                                    placeholder="Details about location, usage, goals..."></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-label-bold text-on-surface mb-1">File Upload
+                                    (Optional)</label>
+                                <div class="flex items-center justify-center w-full">
+                                    <label
+                                        class="flex flex-col items-center justify-center w-full h-20 border-2 border-outline-variant border-dashed rounded-lg cursor-pointer bg-surface hover:bg-surface-container-low transition-colors">
+                                        <div class="flex flex-col items-center justify-center pt-2 pb-2 text-center">
+                                            <span
+                                                class="material-symbols-outlined text-outline mb-1 text-xl">upload_file</span>
+                                            <p class="text-xs text-on-surface-variant"><span class="font-bold">Click to
+                                                    upload</span> (PDF/Image)</p>
+                                        </div>
+                                        <input type="file" class="hidden" />
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-between">
+                            <button type="button" onclick="prevStep(2)"
+                                class="text-on-surface-variant font-label-bold px-5 py-2.5 rounded-full hover:bg-surface-container-high transition-colors">Back</button>
+                            <button type="submit"
+                                class="bg-creative-red text-white font-label-bold px-6 py-2.5 rounded-full hover:bg-red-700 transition-colors shadow-lg flex items-center gap-1">
+                                Submit Request <span class="material-symbols-outlined text-[16px]">send</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Logic
+        const modal = document.getElementById('quote-modal');
+
+        function openModal() {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close when clicking outside modal content
+        modal.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Multi-Step Form Logic
+        function updateProgress(step) {
+            const fill = document.getElementById('progress-bar-fill');
+            if (step === 1) fill.style.width = '0%';
+            if (step === 2) fill.style.width = '50%';
+            if (step === 3) fill.style.width = '100%';
+
+            for (let i = 1; i <= 3; i++) {
+                const indicator = document.getElementById(`step-indicator-${i}`);
+                const text = document.getElementById(`step-text-${i}`);
+
+                if (i <= step) {
+                    indicator.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+                    indicator.classList.add('bg-creative-blue', 'text-white', 'shadow-md');
+                    if (text) {
+                        text.classList.remove('text-on-surface-variant');
+                        text.classList.add('text-creative-blue');
+                    }
+                } else {
+                    indicator.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+                    indicator.classList.remove('bg-creative-blue', 'text-white', 'shadow-md');
+                    if (text) {
+                        text.classList.add('text-on-surface-variant');
+                        text.classList.remove('text-creative-blue');
+                    }
+                }
+            }
+        }
+
+        function validateStep(step) {
+            const currentStepDiv = document.getElementById(`step-${step}`);
+            const inputs = currentStepDiv.querySelectorAll('input[required], select[required], textarea[required]');
+            let isValid = true;
+
+            inputs.forEach(input => {
+                if (!input.checkValidity()) {
+                    input.reportValidity();
+                    isValid = false;
+                }
+            });
+
+            // Special handling for required radio groups
+            const radioGroups = [...new Set([...currentStepDiv.querySelectorAll('input[type="radio"][required]')].map(r => r.name))];
+            radioGroups.forEach(name => {
+                const checked = currentStepDiv.querySelector(`input[name="${name}"]:checked`);
+                if (!checked) {
+                    const firstRadio = currentStepDiv.querySelector(`input[name="${name}"]`);
+                    firstRadio.reportValidity();
+                    isValid = false;
+                }
+            });
+
+            return isValid;
+        }
+
+        function nextStep(step) {
+            if (!validateStep(step - 1)) return;
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step-${step}`).classList.add('active');
+            updateProgress(step);
+        }
+
+        function prevStep(step) {
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById(`step-${step}`).classList.add('active');
+            updateProgress(step);
+        }
+    </script>
+</body>
+
+</html>
